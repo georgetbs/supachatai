@@ -63,18 +63,27 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
 export async function clearChats() {
   try {
-    const cookieStore = cookies()
-    const supabase = createServerActionClient<Database>({
-      cookies: () => cookieStore
-    })
-    await supabase.from('chats').delete().throwOnError()
-    revalidatePath('/')
-    return redirect('/')
-  } catch (error) {
-    console.log('clear chats error', error)
-    return {
-      error: 'Unauthorized'
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({ cookies: () => cookieStore });
+    const auth = await supabase.auth.getSession();
+    const { error } = await supabase
+      .from('chats')
+      .delete()
+      .match({ user_id: auth.data.session?.user.id })
+      .throwOnError();
+
+    if (!error) {
+      revalidatePath('/');
+      // Если нужно перенаправить пользователя после очистки чатов,
+      // вы можете вернуть объект перенаправления:
+      // return { redirect: '/' };
+    } else {
+      console.log('clear chats error', error);
+      return { error: 'Unauthorized' };
     }
+  } catch (error) {
+    console.log('clear chats error', error);
+    return { error: 'Unauthorized' };
   }
 }
 
