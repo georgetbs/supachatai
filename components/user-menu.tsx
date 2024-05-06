@@ -57,29 +57,18 @@ export function UserMenu({ user }: UserMenuProps) {
                 {getUserInitials(user?.user_metadata.name ?? user?.email)}
               </div>
             )}
-            <span className="ml-2">{user?.user_metadata.name ?? '👋🏼'}</span>
+            <span className="ml-2">{user?.user_metadata.name ?? '⚙️'}</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent sideOffset={8} align="start" className="w-[180px]">
-          <DropdownMenuItem className="flex-col items-start">
-            <div className="text-xs font-medium">
+        <DropdownMenuContent sideOffset={8} align="start" className="px-4 w-[250px]">
+          <DropdownMenuItem className="flex-col">
+            <div className=" text-xs font-medium">
               {user?.user_metadata.name}
             </div>
-            <div className="text-xs text-zinc-500">{user?.email}</div>
+            <div className="text-xs cursor-pointer text-zinc-500">{user?.email}</div>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-between text-xs"
-            >
-              Vercel Homepage
-              <IconExternalLink className="ml-auto h-3 w-3" />
-            </a>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={signOut} className="text-xs">
+          <DropdownMenuItem onClick={signOut}  className="flex-col cursor-pointer text-xs">
             Log Out
           </DropdownMenuItem>
         </DropdownMenuContent>
