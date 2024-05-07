@@ -60,15 +60,15 @@ export function UserMenu({ user }: UserMenuProps) {
             <span className="ml-2">{user?.user_metadata.name ?? '⚙️'}</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent sideOffset={8} align="start" className="px-4 w-[250px]">
+        <DropdownMenuContent sideOffset={8} align="start" className="w-[250px] px-4">
           <DropdownMenuItem className="flex-col">
             <div className=" text-xs font-medium">
               {user?.user_metadata.name}
             </div>
-            <div className="text-xs cursor-pointer text-zinc-500">{user?.email}</div>
+            <div className="cursor-pointer text-xs text-zinc-500">{user?.email}</div>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={signOut}  className="flex-col cursor-pointer text-xs">
+          <DropdownMenuItem onClick={signOut}  className="cursor-pointer flex-col text-xs">
             გასვლა
           </DropdownMenuItem>
         </DropdownMenuContent>
