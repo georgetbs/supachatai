@@ -14,7 +14,7 @@ const exampleMessages = [
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <>
-    <div className="mt-16 mx-auto max-w-2xl px-4 align-middle">
+    <div className="mt-16 z-40 mx-auto max-w-2xl px-4 align-middle">
     <div className="flex flex-col gap-2 border bg-background p-8 pt-6 sm:rounded-3xl">
         <h1 className="my-2 text-center text-xl font-semibold">
         მოგესალმებით TOTA AI ჩათბოთში! 
