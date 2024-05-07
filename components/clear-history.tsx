@@ -33,19 +33,18 @@ export function ClearHistory({ clearChats }: ClearHistoryProps) {
       <AlertDialogTrigger asChild>
         <Button variant="ghost" disabled={isPending}>
           {isPending && <IconSpinner className="mr-2" />}
-          Clear history
+          გაასუფთავეთ ისტორია
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>ნამდვილად დარწმუნებული ხართ?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete your chat history and remove your data
-            from our servers.
+          ეს სამუდამოდ წაშლის თქვენს ჩეთის ისტორიასა და მონაცემებს ჩვენი სერვერებიდან.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>გაუქმება</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
             onClick={event => {
@@ -64,7 +63,7 @@ export function ClearHistory({ clearChats }: ClearHistoryProps) {
             }}
           >
             {isPending && <IconSpinner className="mr-2 animate-spin" />}
-            Delete
+            წაშლა
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -104,24 +104,24 @@ export function SidebarActions({
               onClick={() => setDeleteDialogOpen(true)}
             >
               <IconTrash />
-              <span className="sr-only">Delete</span>
+              <span className="sr-only">წაშლა</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Delete chat</TooltipContent>
+          <TooltipContent>ჩატის წაშლა</TooltipContent>
         </Tooltip>
       </div>
       <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Share link to chat</DialogTitle>
+            <DialogTitle>გაზიარეთ ბმული ჩეთთან</DialogTitle>
             <DialogDescription>
-              Anyone with the URL will be able to view the shared chat.
+            ნებისმიერ პირს, ვისაც ექნება URL მისამართი, შეეძლება ნახოს გაზიარებული ჩეთი.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-1 rounded-md border p-4 text-sm">
             <div className="font-medium">{chat.title}</div>
             <div className="text-muted-foreground">
-              {formatDate(chat.createdAt)} · {chat.messages.length} messages
+              {formatDate(chat.createdAt)} · {chat.messages.length} შეტყობინებები
             </div>
           </div>
           <DialogFooter className="items-center">
@@ -162,10 +162,10 @@ export function SidebarActions({
               {isSharePending ? (
                 <>
                   <IconSpinner className="mr-2 animate-spin" />
-                  Copying...
+                  მიმდინარეობს კოპირება...
                 </>
               ) : (
-                <>Copy link</>
+                <>დაკოპირება ბმულისა</>
               )}
             </Button>
           </DialogFooter>
@@ -174,15 +174,14 @@ export function SidebarActions({
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently delete your chat message and remove your
-              data from our servers.
-            </AlertDialogDescription>
+          <AlertDialogTitle>ნამდვილად დარწმუნებული ხართ?</AlertDialogTitle>
+          <AlertDialogDescription>
+          ეს სამუდამოდ წაშლის თქვენს ჩეთის ისტორიასა და მონაცემებს ჩვენი სერვერებიდან.
+          </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isRemovePending}>
-              Cancel
+              გაუქმება
             </AlertDialogCancel>
             <AlertDialogAction
               disabled={isRemovePending}
@@ -207,7 +206,7 @@ export function SidebarActions({
               }}
             >
               {isRemovePending && <IconSpinner className="mr-2 animate-spin" />}
-              Delete
+              წაშლა
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

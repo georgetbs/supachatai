@@ -76,7 +76,7 @@ export function LoginForm({
       <form onSubmit={handleOnSubmit}>
         <fieldset className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
-            <Label>Email</Label>
+            <Label>ელფოსტა</Label>
             <Input
               name="email"
               type="email"
@@ -90,7 +90,7 @@ export function LoginForm({
             />
           </div>
           <div className="flex flex-col gap-y-1">
-            <Label>Password</Label>
+            <Label>პაროლი</Label>
             <Input
               name="password"
               type="password"
@@ -113,16 +113,16 @@ export function LoginForm({
           <p className="ml-4">
             {action === 'sign-in' ? (
               <>
-                Don&apos;t have an account?{' '}
+                არ გაქვს ანგარიში?{' '}
                 <Link href="/sign-up" className="font-medium">
-                  Sign Up
+                შექმენი
                 </Link>
               </>
             ) : (
               <>
-                Already have an account?{' '}
+                უკვე გაქვს ანგარიში?{' '}
                 <Link href="/sign-in" className="font-medium">
-                  Sign In
+                  შესვლა
                 </Link>
               </>
             )}

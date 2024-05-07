@@ -12,7 +12,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
       )}
       {...props}
     >
-      TOTA AI Chatbot can make mistakes. Consider checking important information.{' '}
+      TOTA AI Chatbot შეიძლება აკეთებდეს შეცდომებს. გთხოვთ, გადაამოწმოთ მნიშვნელოვანი ინფორმაცია.{' '}
       <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
     </p>
   )

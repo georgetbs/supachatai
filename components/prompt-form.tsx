@@ -57,10 +57,10 @@ export function PromptForm({
               )}
             >
               <IconPlus />
-              <span className="sr-only">New Chat</span>
+              <span className="sr-only">ახალი ჩათი</span>
             </Link>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>ახალი ჩათი</TooltipContent>
         </Tooltip>
         <Textarea
           ref={inputRef}
@@ -69,7 +69,7 @@ export function PromptForm({
           rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="Send a message."
+          placeholder="შეტყობინების გაგზავნა"
           spellCheck={false}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
@@ -82,10 +82,10 @@ export function PromptForm({
                 disabled={isLoading || input === ''}
               >
                 <IconArrowElbow />
-                <span className="sr-only">Send message</span>
+                <span className="sr-only">შეტყობინების გაგზავნა</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
+            <TooltipContent>შეტყობინების გაგზავნა</TooltipContent>
           </Tooltip>
         </div>
       </div>

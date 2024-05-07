@@ -69,7 +69,7 @@ export function UserMenu({ user }: UserMenuProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut}  className="flex-col cursor-pointer text-xs">
-            Log Out
+            გასვლა
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
