@@ -5,34 +5,41 @@ import { ExternalLink } from '@/components/external-link'
 import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
-  { heading: 'პროგრამული კოდის განხილვა', message: 'გთხოვთ, გაუკეთოთ კოდრივიუ ამ Python კოდს და მომაწოდოთ შენიშვნები:' },
-{ heading: 'ლექსის ანალიზი', message: 'განმარტეთ შოთა რუსთაველის "ვეფხისტყაოსნის" შინაარსი' },
-{ heading: 'წერილის რედაქტირება', message: 'გთხოვთ, გააუმჯობესოთ ეს ოფიციალური წერილის პროექტი:' },
-{ heading: 'მათემატიკური ამოცანის ამოხსნა', message: 'დამეხმარეთ ამ დიფერენციალური განტოლების ამოხსნაში:' }
+  {
+    heading: 'Explain technical concepts',
+    message: `What is a "serverless function"?`
+  },
+  {
+    heading: 'Summarize an article',
+    message: 'Summarize the following article for a 2nd grader: \n'
+  },
+  {
+    heading: 'Draft an email',
+    message: `Draft an email to my boss about the following: \n`
+  }
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
-    <>
-    <div className="mt-16 mx-auto max-w-2xl px-4 align-middle">
-    <div className="flex flex-col gap-2 border bg-background p-8 pt-6 sm:rounded-3xl">
-        <h1 className="my-2 text-center text-xl font-semibold">
-        მოგესალმებით TOTA AI ჩათბოთში! 
+    <div className="mx-auto max-w-2xl px-4">
+      <div className="rounded-lg border bg-background p-8">
+        <h1 className="mb-2 text-lg font-semibold">
+          Welcome to the Supabaseified Next.js AI Chatbot!
         </h1>
-        <h1 className="my-2 text-center text-2xl font-semibold">
-        როგორ შემიძლია დაგეხმაროთ დღეს?
-        </h1>
-        </div>
-  
-      
-    
-          <div className="fixed inset-x-0 pb-20 mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 px-4">
+        <p className="mb-2 leading-normal text-muted-foreground">
+          This is an open source AI chatbot app template built with{' '}
+          <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> and{' '}
+          <ExternalLink href="https://supabase.com">Supabase</ExternalLink>.
+        </p>
+        <p className="leading-normal text-muted-foreground">
+          You can start a conversation here or try the following examples:
+        </p>
+        <div className="mt-4 flex flex-col items-start space-y-2">
           {exampleMessages.map((message, index) => (
             <Button
               key={index}
               variant="link"
-              className="cursor-pointer space-y-4 rounded-xl border bg-white p-8 pe-6 ps-6 hover:bg-gray-50 dark:bg-zinc-950  dark:hover:bg-zinc-900"
-              
+              className="h-auto p-0 text-base"
               onClick={() => setInput(message.message)}
             >
               <IconArrowRight className="mr-2 text-muted-foreground" />
@@ -40,7 +47,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             </Button>
           ))}
         </div>
-        </div>
-        </>
+      </div>
+    </div>
   )
 }
