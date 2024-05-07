@@ -26,7 +26,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   
       
     </div>
-          <div className="fixed inset-x-0 bottom-40 mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 px-4">
+          <div className="fixed inset-x-0 mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 px-4">
           {exampleMessages.map((message, index) => (
             <Button
               key={index}
