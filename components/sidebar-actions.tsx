@@ -90,10 +90,10 @@ export function SidebarActions({
               onClick={() => setShareDialogOpen(true)}
             >
               <IconShare />
-              <span className="sr-only">Share</span>
+              <span className="sr-only">წაშლა</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Share chat</TooltipContent>
+          <TooltipContent>ჩატის წაშლა</TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
