@@ -40,7 +40,7 @@ export function Sidebar({ children }: SidebarProps) {
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={(newOpenValue) => {
+    <Sheet modal={false} open={isOpen} onOpenChange={(newOpenValue) => {
       // Переключение состояния только на узких экранах или при явном закрытии
       if (!window.matchMedia('(min-width: 728px)').matches || !isOpen) {
         setIsOpen(newOpenValue);
