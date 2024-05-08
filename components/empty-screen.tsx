@@ -14,7 +14,7 @@ const exampleMessages = [
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <>
-    <div className="mx-auto max-w-2xl px-4 pt-6 overflow-y-hidden">
+    <div className="relative mx-auto max-w-2xl px-4 pt-6">
     <div className="flex flex-col gap-2 sm:rounded-3xl border bg-background p-8">
         <h1 className="mt-2 mb-2 text-xl font-semibold text-center">
         მოგესალმებით TOTA AI ჩათბოთში! 
@@ -26,7 +26,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   
       
     </div>
-          <div className="fixed inset-x-0 bottom-40 mx-auto w-full max-w-2xl px-4 grid grid-cols-2 gap-4">
+          <div className="absolute inset-x-0 bottom-40 mx-auto w-full max-w-2xl px-4 grid grid-cols-2 gap-4">
           {exampleMessages.map((message, index) => (
             <Button
               key={index}
