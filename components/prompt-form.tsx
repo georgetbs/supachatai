@@ -1,21 +1,19 @@
 import * as React from 'react'
-import Link from 'next/link'
 import Textarea from 'react-textarea-autosize'
 import { UseChatHelpers } from 'ai/react'
 
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
-import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { cn,} from '@/lib/utils'
+import { Button, buttonVariants  } from '@/components/ui/button'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { IconArrowElbow, IconEdit } from '@/components/ui/icons'
+import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
 
-export interface PromptProps
-  extends Pick<UseChatHelpers, 'input' | 'setInput'> {
-  onSubmit: (value: string) => Promise<void>
+export interface PromptProps extends Pick<UseChatHelpers, 'input' | 'setInput'> {
+  onSubmit: (value: string, file: File | null) => Promise<void>
   isLoading: boolean
 }
 
@@ -27,6 +25,9 @@ export function PromptForm({
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const fileInputRef = React.useRef<HTMLInputElement>(null)
+  const [file, setFile] = React.useState<File | null>(null)
+  const [isFileLoading, setIsFileLoading] = React.useState(false)
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -34,33 +35,46 @@ export function PromptForm({
     }
   }, [])
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files ? event.target.files[0] : null
+    setFile(selectedFile)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input?.trim() && !file) {
+      return
+    }
+    setIsFileLoading(true) // Установка состояния загрузки файла
+    await onSubmit(input, file)
+    setInput('')
+    setFile(null)
+    setIsFileLoading(false) // Сброс состояния загрузки файла после отправки
+  }
+
   return (
-    <form
-      onSubmit={async e => {
-        e.preventDefault()
-        if (!input?.trim()) {
-          return
-        }
-        setInput('')
-        await onSubmit(input)
-      }}
-      ref={formRef}
-    >
+    <form onSubmit={handleSubmit} ref={formRef}>
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link
-              href="/"
+            <button
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
                 'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
               )}
+              onClick={() => fileInputRef.current?.click()}
             >
-              <IconEdit />
-              <span className="sr-only">ახალი ჩათი</span>
-            </Link>
+              <IconPlus />
+              <span className="sr-only">Прикрепить файл</span>
+            </button>
           </TooltipTrigger>
-          <TooltipContent>ახალი ჩათი</TooltipContent>
+          <TooltipContent>Прикрепить файл {file ? `: ${file.name}` : ''}</TooltipContent>
         </Tooltip>
         <Textarea
           ref={inputRef}
@@ -69,7 +83,7 @@ export function PromptForm({
           rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="შეტყობინების გაგზავნა"
+          placeholder="Введите сообщение"
           spellCheck={false}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
@@ -79,13 +93,13 @@ export function PromptForm({
               <Button
                 type="submit"
                 size="icon"
-                disabled={isLoading || input === ''}
+                disabled={isLoading || isFileLoading || (!input && !file)}
               >
                 <IconArrowElbow />
-                <span className="sr-only">შეტყობინების გაგზავნა</span>
+                <span className="sr-only">Отправить сообщение</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>შეტყობინების გაგზავნა</TooltipContent>
+            <TooltipContent>Отправить сообщение</TooltipContent>
           </Tooltip>
         </div>
       </div>
