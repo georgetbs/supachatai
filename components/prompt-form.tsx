@@ -71,10 +71,10 @@ export function PromptForm({
               onClick={() => fileInputRef.current?.click()}
             >
               <IconPlus />
-              <span className="sr-only">Прикрепить файл</span>
+              <span className="sr-only">დაურთეთ ფაილი</span>
             </button>
           </TooltipTrigger>
-          <TooltipContent>Прикрепить файл {file ? `: ${file.name}` : ''}</TooltipContent>
+          <TooltipContent>ფაილი დაერთო {file ? `: ${file.name}` : ''}</TooltipContent>
         </Tooltip>
         <Textarea
           ref={inputRef}
@@ -83,7 +83,7 @@ export function PromptForm({
           rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="Введите сообщение"
+          placeholder="შეიყვანეთ შეტყობინება"
           spellCheck={false}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
@@ -96,10 +96,10 @@ export function PromptForm({
                 disabled={isLoading || isFileLoading || (!input && !file)}
               >
                 <IconArrowElbow />
-                <span className="sr-only">Отправить сообщение</span>
+                <span className="sr-only">შეტყობინების გაგზავნა</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Отправить сообщение</TooltipContent>
+            <TooltipContent>შეტყობინების გაგზავნა</TooltipContent>
           </Tooltip>
         </div>
       </div>
