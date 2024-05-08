@@ -11,13 +11,15 @@ import {
   IconGitHub,
   IconNextChat,
   IconSeparator,
-  IconVercel
+  IconVercel,
+  IconEdit
 } from '@/components/ui/icons'
 import { SidebarFooter } from '@/components/sidebar-footer'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { ClearHistory } from '@/components/clear-history'
 import { UserMenu } from '@/components/user-menu'
 import { cookies } from 'next/headers'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export async function Header() {
   const cookieStore = cookies()
@@ -46,18 +48,30 @@ export async function Header() {
       </div>
       
       <div className="flex items-center">
-        <div className="flex items-center">
-          <IconSeparator className="h-6 w-6 text-muted-foreground/50" />
-          {session?.user ? (
-            <UserMenu user={session.user} />
-          ) : (
-            <Button variant="link" asChild className="-ml-2">
-              <Link href="/sign-in">შესვლა</Link>
-            </Button>
-          )}
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="/"
+              className={cn(
+                buttonVariants({ size: 'sm', variant: 'outline' }),
+                'h-8 w-14 bg-background p-0'
+              )}
+            >
+              <IconEdit />
+              <span className="sr-only">ახალი ჩათი</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>ახალი ჩათი</TooltipContent>
+        </Tooltip>
+        <IconSeparator className="mx-4 h-6 w-6 text-muted-foreground/50" />
+        {session?.user ? (
+          <UserMenu user={session.user} />
+        ) : (
+          <Button variant="link" asChild className="-ml-2">
+            <Link href="/sign-in">შესვლა</Link>
+          </Button>
+        )}
       </div>
     </header>
   )
 }
-
