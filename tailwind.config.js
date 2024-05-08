@@ -9,7 +9,8 @@ module.exports = {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px'
+        '2xl': '1400px',
+        'sm': '728px'  // Добавляем custom breakpoint для экранов шире 728px
       }
     },
     extend: {

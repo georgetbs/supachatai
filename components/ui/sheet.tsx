@@ -7,9 +7,7 @@ import { cn } from '@/lib/utils'
 import { IconClose } from '@/components/ui/icons'
 
 const Sheet = SheetPrimitive.Root
-
 const SheetTrigger = SheetPrimitive.Trigger
-
 const SheetClose = SheetPrimitive.Close
 
 const SheetPortal = ({
@@ -29,17 +27,17 @@ SheetPortal.displayName = SheetPrimitive.Portal.displayName
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
->(({ className, children, ...props }, ref) => (
+>(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
-    className={cn(
-      'fixed inset-0 z-50 transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
-      className
-    )}
+    className={cn('fixed inset-0 z-50 transition-opacity duration-300 ease-out sm:hidden', className)}
     {...props}
     ref={ref}
   />
-))
-SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
+));
+SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
+
+
+
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
@@ -49,16 +47,16 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed z-50 h-full border-r bg-background p-6 opacity-100 shadow-lg data-[state=closed]:animate-slide-to-left data-[state=open]:animate-slide-from-left',
+        'fixed z-50 h-full border-r bg-background p-6 opacity-100 shadow-lg transition-transform duration-300 ease-out',
+        'data-[state=closed]:translate-x-full',
+        'data-[state=open]:translate-x-0',
+        'lg:translate-x-0', // Keeps the drawer open on large screens
         className
       )}
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <IconClose />
-        <span className="sr-only">Close</span>
-      </SheetPrimitive.Close>
+
     </SheetPrimitive.Content>
   </SheetPortal>
 ))
@@ -115,6 +113,7 @@ export {
   SheetTrigger,
   SheetClose,
   SheetContent,
+  SheetOverlay,
   SheetHeader,
   SheetFooter,
   SheetTitle,
