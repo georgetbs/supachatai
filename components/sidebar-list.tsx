@@ -28,7 +28,7 @@ export async function SidebarList({ userId }: SidebarListProps) {
         </div>
       ) : (
         <div className="p-8 text-center">
-          <p className="text-sm text-muted-foreground">ჩეთის ისტორია არ არის</p>
+          <p className="text-sm text-foreground">ჩეთის ისტორია არ არის</p>
         </div>
       )}
     </div>
