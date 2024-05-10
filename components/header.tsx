@@ -26,42 +26,43 @@ export async function Header() {
 
     return (
       <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
-        <div className="flex items-center">
-          {session?.user ? (
-            <Sidebar>
-              <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
-                {/* @ts-ignore */}
-                <SidebarList userId={session?.user?.id} />
-              </React.Suspense>
-              <SidebarFooter>
-                <ThemeToggle />
-                <ClearHistory clearChats={clearChats} />
-              </SidebarFooter>
-            </Sidebar>
-          ) : null}
-       
-             <Tooltip>
-          <TooltipTrigger asChild>
-            <Link
-              href="/"
-              className={cn(
-                buttonVariants({ size: 'sm', variant: 'outline' }),
-                'h-8 w-14 bg-background text-primary p-0 ml-2'
-              )}
-            >
-              <IconEdit />
-              <span className="sr-only">ახალი ჩათი</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>ახალი ჩათი</TooltipContent>
-        </Tooltip>
-        </div>
+    <div className="flex items-center mx-2 justify-center text-primary h-full">
+  {session?.user ? (
+    <Sidebar>
+      <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
+        {/* @ts-ignore */}
+        <SidebarList userId={session?.user?.id} />
+      </React.Suspense>
+      <SidebarFooter>
+        <ThemeToggle />
+        <ClearHistory clearChats={clearChats} />
+      </SidebarFooter>
+    </Sidebar>
+  ) : null}
+  <IconSeparator className="h-6 w-6 mx-1 text-muted-foreground/50" />
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Link
+        href="/"
+        className={cn(
+          buttonVariants({ size: 'sm', variant: 'outline' }),
+          'bg-background mx-1 px-4 rounded-full text-primary'
+        )}
+      >
+        <IconEdit />
+        <span className="sr-only">ახალი ჩათი</span>
+      </Link>
+    </TooltipTrigger>
+    <TooltipContent>ახალი ჩათი</TooltipContent>
+  </Tooltip>
+</div>
+
         
 
     
       
       <div className="flex items-center">
-      <h1 className="mt-2 mb-2 text-xl font-semibold text-primary text-center">
+      <h1 className="px-5 text-xl font-semibold text-primary text-center">
       <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
         </h1>
      

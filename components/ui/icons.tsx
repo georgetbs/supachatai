@@ -402,7 +402,7 @@ function IconEdit({ className, ...props }: React.ComponentProps<'svg'>) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={cn('h-4 w-4', className)}
+      className={cn('h-6 w-6', className)}
       {...props}
     >
       <path
