@@ -1,51 +1,47 @@
-'use client'
+// components/ui/login-button.tsx
+'use client';
 
-import * as React from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import * as React from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { IconGoogle, IconSpinner } from '@/components/ui/icons';
 
-import { cn } from '@/lib/utils'
-import { Button, type ButtonProps } from '@/components/ui/button'
-import { IconGitHub, IconSpinner } from '@/components/ui/icons'
-
-interface LoginButtonProps extends ButtonProps {
-  showGithubIcon?: boolean
-  text?: string
+interface GoogleLoginButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  text?: string;
 }
 
-export function LoginButton({
-  text = 'Login with GitHub',
-  showGithubIcon = true,
+export function GoogleLoginButton({
+  text = 'Continue with Google',
   className,
   ...props
-}: LoginButtonProps) {
-  const [isLoading, setIsLoading] = React.useState(false)
-  // Create a Supabase client configured to use cookies
-  const supabase = createClientComponentClient()
+}: GoogleLoginButtonProps) {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const supabase = createClientComponentClient();
 
-  if (process.env.NEXT_PUBLIC_AUTH_GITHUB !== 'true') {
-    return null
-  }
+  const handleLogin = async () => {
+    setIsLoading(true);
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${location.origin}/api/auth/callback` }
+    });
+    setIsLoading(false);
+  };
 
   return (
-    <Button
-      variant="outline"
-      onClick={async () => {
-        setIsLoading(true)
-        await supabase.auth.signInWithOAuth({
-          provider: 'github',
-          options: { redirectTo: `${location.origin}/api/auth/callback` }
-        })
-      }}
+    <button
+      onClick={handleLogin}
       disabled={isLoading}
-      className={cn(className)}
+      className={`inline-flex items-center justify-center relative shrink-0 ring-offset-2 ring-offset-bg-300 ring-accent-main-100 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none disabled:drop-shadow-none text-text-200 transition-all font-styrene active:bg-bg-400 hover:bg-bg-500/40 hover:text-text-100 h-11 rounded-[0.6rem] px-5 min-w-[6rem] active:scale-[0.985] whitespace-nowrap bg-white/90 gap-2 font-medium w-full border-0.5 border-border-400 hover:bg-white hover:border-border-300 ${className}`}
+      data-testid="login-with-google"
       {...props}
     >
       {isLoading ? (
         <IconSpinner className="mr-2 animate-spin" />
-      ) : showGithubIcon ? (
-        <IconGitHub className="mr-2" />
-      ) : null}
+      ) : (
+        <IconGoogle />
+      )}
       {text}
-    </Button>
-  )
+    </button>
+  );
 }
