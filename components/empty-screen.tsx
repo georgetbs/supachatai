@@ -34,7 +34,8 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             <Button
               key={index}
               variant="link"
-              className="cursor-pointer space-y-4 rounded-xl border sm:p-8 max-w-screen-sm:p-12 ps-6 pe-6 hover:bg-gray-50 dark:bg-background  dark:hover:bg-zinc-900"
+              className="cursor-pointer space-y-4 rounded-xl border p-12 sm:p-8 max-w-screen-sm ps-6 pe-6 hover:bg-gray-50 dark:bg-background dark:hover:bg-zinc-900"
+
               
               onClick={() => setInput(message.message)}
             >

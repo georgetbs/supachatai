@@ -39,21 +39,14 @@ export async function Header() {
               </SidebarFooter>
             </Sidebar>
           ) : null}
-        </div>
-
-    
-      
-      <div className="flex items-center">
-      <h1 className="mt-2 mb-2 mr-4 text-xl font-semibold text-primary text-center">
-      <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
-        </h1>
-        <Tooltip>
+       
+             <Tooltip>
           <TooltipTrigger asChild>
             <Link
               href="/"
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
-                'h-8 w-14 bg-background text-primary p-0'
+                'h-8 w-14 bg-background text-primary p-0 ml-2'
               )}
             >
               <IconEdit />
@@ -62,7 +55,17 @@ export async function Header() {
           </TooltipTrigger>
           <TooltipContent>ახალი ჩათი</TooltipContent>
         </Tooltip>
-        <IconSeparator className="mx-4 h-6 w-6 text-muted-foreground/50" />
+        </div>
+        
+
+    
+      
+      <div className="flex items-center">
+      <h1 className="mt-2 mb-2 text-xl font-semibold text-primary text-center">
+      <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
+        </h1>
+     
+        <IconSeparator className="mx-1 h-6 w-6 text-muted-foreground/50" />
         {session?.user ? (
           <UserMenu user={session.user} />
         ) : (
