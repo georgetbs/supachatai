@@ -17,7 +17,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
     <div className="relative mx-auto max-w-2xl px-4 pt-6">
     <div className="flex flex-col gap-2 sm:rounded-3xl bg-background p-8">
         <div className='flex self-center'>
-        <IconTota className='bg-primary border-2 rounded-full shadow h-[70px] w-[70px]'/>
+        <IconTota className='border-2 text-primary rounded-full shadow h-[70px] w-[70px]'/>
         </div>
         <h1 className="mt-2 mb-2 text-xl font-semibold text-center">
         
@@ -34,7 +34,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             <Button
               key={index}
               variant="link"
-              className="cursor-pointer space-y-4 rounded-xl border bg-white p-12 ps-6 pe-6 hover:bg-gray-50 dark:bg-zinc-950  dark:hover:bg-zinc-900"
+              className="cursor-pointer space-y-4 rounded-xl border sm:p-8 max-w-screen-sm:p-12 ps-6 pe-6 hover:bg-gray-50 dark:bg-background  dark:hover:bg-zinc-900"
               
               onClick={() => setInput(message.message)}
             >

@@ -44,8 +44,8 @@ export async function Header() {
     
       
       <div className="flex items-center">
-      <h1 className="mt-2 mb-2 mr-4 text-xl font-semibold text-center">
-      <ExternalLink href="https://tota.ge">Tota</ExternalLink> AI
+      <h1 className="mt-2 mb-2 mr-4 text-xl font-semibold text-primary text-center">
+      <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
         </h1>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -53,7 +53,7 @@ export async function Header() {
               href="/"
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
-                'h-8 w-14 bg-background p-0'
+                'h-8 w-14 bg-background text-primary p-0'
               )}
             >
               <IconEdit />

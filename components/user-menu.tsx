@@ -65,7 +65,7 @@ export function UserMenu({ user }: UserMenuProps) {
             <div className=" text-xs font-medium">
               {user?.user_metadata.name}
             </div>
-            <div className="cursor-pointer text-xs text-zinc-500">{user?.email}</div>
+            <div className="cursor-pointer text-xs text-zinc-600 dark:text-zinc-300">{user?.email}</div>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut}  className="cursor-pointer flex-col text-xs">

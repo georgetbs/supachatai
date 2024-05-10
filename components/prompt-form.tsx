@@ -66,7 +66,7 @@ export function PromptForm({
             <button
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
-                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
+                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background text-primary p-0 sm:left-4'
               )}
               onClick={() => fileInputRef.current?.click()}
             >
