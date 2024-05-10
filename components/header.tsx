@@ -45,7 +45,7 @@ export async function Header() {
       
       <div className="flex items-center">
       <h1 className="mt-2 mb-2 mr-4 text-xl font-semibold text-center">
-      <ExternalLink href="https://tota.ge">Tota</ExternalLink> AI Chatbot
+      <ExternalLink href="https://tota.ge">Tota</ExternalLink> AI
         </h1>
         <Tooltip>
           <TooltipTrigger asChild>
