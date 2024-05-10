@@ -47,6 +47,7 @@ export function ClearHistory({ clearChats }: ClearHistoryProps) {
           <AlertDialogCancel disabled={isPending}>გაუქმება</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
+            className=' bg-red-600 hover:bg-red-700 dark:text-red-100'
             onClick={event => {
               event.preventDefault()
               startTransition(async () => {
