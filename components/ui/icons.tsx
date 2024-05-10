@@ -476,6 +476,26 @@ function IconChevronUpDown({
   )
 }
 
+function IconTota({  className,
+  ...props
+}: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 536 536"  // Обеспечиваем, что viewBox соответствует размерам SVG
+    className={`h-10 w-10 ${className}`}
+    {...props}
+  >
+    <g>
+      <rect fill="white" height="538" width="538" y="-1" x="-1"/>
+    </g>
+    <g fill="none" transform="translate(0,536) scale(0.10000000149011612,-0.10000000149011612)">
+      <path fill="currentColor" d="m1276,4535c-81,-33 -123,-71 -155,-140c-28,-58 -32,-77 -32,-144c-1,-127 77,-231 206,-276c45,-15 104,-17 558,-18c352,0 507,-4 508,-11c0,-6 1,-762 2,-1681l2,-1670l26,-62c42,-100 89,-146 188,-184c67,-25 186,-25 258,0c74,25 119,59 158,118c72,107 68,-8 68,1834l0,1656l486,0c267,0 508,3 536,7c154,24 249,137 248,297c-1,127 -60,221 -172,273c-46,21 -46,21 -1436,23l-1390,3l-59,-25z"/>
+    </g>
+  </svg>
+);
+}
+
 export {
   IconEdit,
   IconNextChat,
@@ -503,5 +523,6 @@ export {
   IconShare,
   IconUsers,
   IconExternalLink,
-  IconChevronUpDown
+  IconChevronUpDown,
+  IconTota
 }

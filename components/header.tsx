@@ -8,10 +8,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { Sidebar } from '@/components/sidebar'
 import { SidebarList } from '@/components/sidebar-list'
 import {
-  IconGitHub,
-  IconNextChat,
   IconSeparator,
-  IconVercel,
   IconEdit
 } from '@/components/ui/icons'
 import { SidebarFooter } from '@/components/sidebar-footer'
@@ -20,6 +17,7 @@ import { ClearHistory } from '@/components/clear-history'
 import { UserMenu } from '@/components/user-menu'
 import { cookies } from 'next/headers'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { ExternalLink } from '@/components/external-link'
 
 export async function Header() {
   const cookieStore = cookies()
@@ -46,6 +44,9 @@ export async function Header() {
     
       
       <div className="flex items-center">
+      <h1 className="mt-2 mb-2 mr-4 text-xl font-semibold text-center">
+      <ExternalLink href="https://tota.ge">Tota</ExternalLink> AI Chatbot
+        </h1>
         <Tooltip>
           <TooltipTrigger asChild>
             <Link

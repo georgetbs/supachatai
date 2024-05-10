@@ -5,7 +5,7 @@ import remarkMath from 'remark-math'
 import { cn } from '@/lib/utils'
 import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
-import { IconOpenAI, IconUser } from '@/components/ui/icons'
+import { IconTota, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/chat-message-actions'
 
 export interface ChatMessageProps {
@@ -20,13 +20,13 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
     >
       <div
         className={cn(
-          'flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow',
+          'flex  h-8 w-8',
           message.role === 'user'
-            ? 'bg-background'
-            : 'bg-primary text-primary-foreground'
+            ? ' bg-background rounded-md shrink-0 select-none items-center justify-center  border shadow'
+            : ' bg-background shrink-0 items-center justify-center rounded-xl'
         )}
       >
-        {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
+        {message.role === 'user' ? <IconUser /> : <IconTota className='border rounded-full h-[30px] p-1 shadow w-[30px]'/>}
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemoizedReactMarkdown
