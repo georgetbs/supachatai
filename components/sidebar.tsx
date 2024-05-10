@@ -66,7 +66,7 @@ export function Sidebar({ children }: SidebarProps) {
                 href="/"
                 className={cn(
                   buttonVariants({ size: 'sm', variant: 'outline' }),
-                  'absolute left-36 top-1 h-8 w-14 bg-background text-primary p-0'
+                  'absolute left-40 top-1 h-8 w-14 bg-background text-primary p-0'
                 )}
               >
                 <IconEdit />
