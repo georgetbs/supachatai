@@ -76,7 +76,7 @@ export function LoginForm({
       <form onSubmit={handleOnSubmit}>
         <fieldset className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
-            <Label>ელფოსტა</Label>
+            <Label className='ml-3 mb-1'>ელფოსტა</Label>
             <Input
               name="email"
               type="email"
@@ -90,7 +90,7 @@ export function LoginForm({
             />
           </div>
           <div className="flex flex-col gap-y-1">
-            <Label>პაროლი</Label>
+            <Label className='ml-3 mb-1'>პაროლი</Label>
             <Input
               name="password"
               type="password"
