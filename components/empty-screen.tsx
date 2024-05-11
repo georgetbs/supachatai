@@ -39,7 +39,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
               
               onClick={() => setInput(message.message)}
             >
-              <IconArrowRight className="mr-2 text-muted-foreground" />
+              <IconArrowRight className="mr-2 w-4 h-4 text-muted-foreground" />
               {message.heading}
             </Button>
           ))}
