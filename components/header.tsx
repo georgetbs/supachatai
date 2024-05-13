@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-
+import { ModelsSwitch } from './models-switch'
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
 import { clearChats } from '@/app/actions'
@@ -63,7 +63,7 @@ export async function Header() {
       
       <div className="flex items-center">
       <h1 className="px-5 text-xl font-semibold text-primary text-center">
-      <ExternalLink href="https://tota.ge">Tota.ge</ExternalLink>
+      <ModelsSwitch />
         </h1>
      
         <IconSeparator className="mx-1 h-6 w-6 text-muted-foreground/50" />
