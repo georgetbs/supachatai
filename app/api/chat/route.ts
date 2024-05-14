@@ -1,20 +1,20 @@
-import 'server-only'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { Configuration, OpenAIApi } from 'openai-edge'
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { Database } from '@/lib/db_types'
+import 'server-only';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { Configuration, OpenAIApi } from 'openai-edge';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { Database } from '@/lib/db_types';
 
-import { auth } from '@/auth'
-import { nanoid } from '@/lib/utils'
+import { auth } from '@/auth';
+import { nanoid } from '@/lib/utils';
 
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
-})
+});
 
-const openai = new OpenAIApi(configuration)
+const openai = new OpenAIApi(configuration);
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -22,27 +22,37 @@ interface Message {
 }
 
 export async function POST(req: Request) {
-  const cookieStore = cookies()
+  const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
     cookies: () => cookieStore
-  })
-  const json = await req.json()
-  const { messages, previewToken } = json
-  const userId = (await auth({ cookieStore }))?.user.id
+  });
+  const json = await req.json();
+  const { messages, previewToken } = json;
+  const userId = (await auth({ cookieStore }))?.user.id;
 
   if (!userId) {
     return new Response('Unauthorized', {
       status: 401
-    })
+    });
   }
 
   if (previewToken) {
-    configuration.apiKey = previewToken
+    configuration.apiKey = previewToken;
   }
 
-  const originalMessages = [...messages];
+  const { model: modelQuery } = req.url.match(/\/api\/chat\/(?<model>[^\/]+)\/?/)?.groups || {};
+  const modelConfig: { [key: string]: string } = {
+    'gpt-3.5-turbo': 'gpt-3.5-turbo',
+    'gpt-4': 'gpt-4',
+    'tota-ge': 'gpt-3.5-turbo'
+  };
+  
+  // Обеспечиваем, что modelQuery является ключом в modelConfig, иначе используем 'tota-ge' по умолчанию
+  const model = modelConfig[modelQuery as keyof typeof modelConfig] || modelConfig['tota-ge'];
+  
 
-  const apiMessages = [
+  const originalMessages = [...messages];
+  const modifiedMessages = model === 'tota-ge' ? [
     {
       role: 'system',
       content: `\
@@ -57,25 +67,25 @@ export async function POST(req: Request) {
       
       But when you do coding tasks, please use English.`
     },
-    ...messages.map((msg: { role: string; content: string }) => ({
+    ...messages.map((msg: Message) => ({
       ...msg,
       content: msg.role !== 'system' ? transliterateGeorgian(msg.content) : msg.content
     }))
-  ];
+  ] : messages;
 
   const res = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages: apiMessages,
+    model: model,
+    messages: modifiedMessages,
     temperature: 0.7,
     stream: true
-  })
+  });
 
   const stream = OpenAIStream(res, {
     async onCompletion(completion) {
-      const title = json.messages[0].content.substring(0, 100)
-      const id = json.id ?? nanoid()
-      const createdAt = Date.now()
-      const path = `/chat/${id}`
+      const title = json.messages[0].content.substring(0, 100);
+      const id = json.id ?? nanoid();
+      const createdAt = Date.now();
+      const path = `/chat/${id}`;
       const payload = {
         id,
         title,
@@ -89,17 +99,13 @@ export async function POST(req: Request) {
             role: 'assistant'
           }
         ]
-      }
-      await supabase.from('chats').upsert({ id, payload }).throwOnError()
+      };
+      await supabase.from('chats').upsert({ id, payload }).throwOnError();
     }
-  })
-
-  type GeorgianToLatinMap = {
-    [key: string]: string;
-  };
+  });
 
   function transliterateGeorgian(content: string): string {
-    const georgianToLatin: GeorgianToLatinMap = {
+  const georgianToLatinMap: Record<string, string> = {
       'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e',
       'ვ': 'v', 'ზ': 'z', 'თ': 't', 'ი': 'i', 'კ': 'k',
       'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 'პ': 'p',
@@ -108,8 +114,8 @@ export async function POST(req: Request) {
       'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 'წ': 'ts', 'ჭ': 'tch',
       'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
     };
-    return content.split('').map(char => georgianToLatin[char] || char).join('');
+    return content.split('').map(char => georgianToLatinMap[char]|| char).join('');
   }
 
-  return new StreamingTextResponse(stream)
+  return new StreamingTextResponse(stream);
 }
